@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../models/api_response_model.dart';
@@ -115,9 +116,16 @@ class ApiService {
       );
     } on FormatException {
       stopwatch.stop();
-      debugPrint('❌ POST FormatException');
+      debugPrint('❌ POST FormatException: Invalid JSON response.');
       return ApiResponse.error(
         message: 'Invalid response from server.',
+        statusCode: 0,
+      );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ POST TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
         statusCode: 0,
       );
     } catch (e) {
@@ -188,12 +196,21 @@ class ApiService {
       return _handleResponse(response);
     } on SocketException {
       stopwatch.stop();
+      debugPrint('❌ GET SocketException: No internet connection or server unreachable.');
       return ApiResponse.error(
         message: 'No internet connection. Please check your network.',
         statusCode: 0,
       );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ GET TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
+        statusCode: 0,
+      );
     } catch (e) {
       stopwatch.stop();
+      debugPrint('❌ GET Exception: $e');
       return ApiResponse.error(
         message: 'Something went wrong: ${e.toString()}',
         statusCode: 0,
@@ -257,12 +274,21 @@ class ApiService {
       return _handleResponse(response);
     } on SocketException {
       stopwatch.stop();
+      debugPrint('❌ PATCH SocketException: No internet connection or server unreachable.');
       return ApiResponse.error(
         message: 'No internet connection. Please check your network.',
         statusCode: 0,
       );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ PATCH TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
+        statusCode: 0,
+      );
     } catch (e) {
       stopwatch.stop();
+      debugPrint('❌ PATCH Exception: $e');
       return ApiResponse.error(
         message: 'Something went wrong: ${e.toString()}',
         statusCode: 0,
@@ -357,12 +383,21 @@ class ApiService {
       return _handleResponse(response);
     } on SocketException {
       stopwatch.stop();
+      debugPrint('❌ PATCH Multipart SocketException: No internet connection or server unreachable.');
       return ApiResponse.error(
         message: 'No internet connection. Please check your network.',
         statusCode: 0,
       );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ PATCH Multipart TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
+        statusCode: 0,
+      );
     } catch (e) {
       stopwatch.stop();
+      debugPrint('❌ PATCH Multipart Exception: $e');
       return ApiResponse.error(
         message: 'Something went wrong: ${e.toString()}',
         statusCode: 0,
@@ -456,12 +491,21 @@ class ApiService {
       return _handleResponse(response);
     } on SocketException {
       stopwatch.stop();
+      debugPrint('❌ POST Multipart SocketException: No internet connection or server unreachable.');
       return ApiResponse.error(
         message: 'No internet connection. Please check your network.',
         statusCode: 0,
       );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ POST Multipart TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
+        statusCode: 0,
+      );
     } catch (e) {
       stopwatch.stop();
+      debugPrint('❌ POST Multipart Exception: $e');
       return ApiResponse.error(
         message: 'Something went wrong: ${e.toString()}',
         statusCode: 0,
@@ -522,12 +566,21 @@ class ApiService {
       return _handleResponse(response);
     } on SocketException {
       stopwatch.stop();
+      debugPrint('❌ DELETE SocketException: No internet connection or server unreachable.');
       return ApiResponse.error(
         message: 'No internet connection. Please check your network.',
         statusCode: 0,
       );
+    } on TimeoutException {
+      stopwatch.stop();
+      debugPrint('❌ DELETE TimeoutException: The server took too long to respond. This is a BACKEND server issue (server down or IP changed).');
+      return ApiResponse.error(
+        message: 'Connection timed out. The backend server is unreachable.',
+        statusCode: 0,
+      );
     } catch (e) {
       stopwatch.stop();
+      debugPrint('❌ DELETE Exception: $e');
       return ApiResponse.error(
         message: 'Something went wrong: ${e.toString()}',
         statusCode: 0,
