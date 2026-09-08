@@ -5,7 +5,7 @@ class AppConstants {
   AppConstants._();
 
   // ─── Base URL ───────────────────────────────────────────────────────────────
-  static const String baseUrl = 'http://18.233.192.169:8000';
+  static const String baseUrl = 'https://mention-downloading-unique-trips.trycloudflare.com';
 
   // ─── API Endpoints ──────────────────────────────────────────────────────────
   static const String registerEndpoint = '/accounts/user/register/';

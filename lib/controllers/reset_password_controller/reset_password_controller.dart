@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../models/api_response_model.dart';
@@ -74,10 +74,6 @@ class ResetPasswordController extends GetxController {
   bool _validateFields() {
     if (_resetToken.value.isEmpty) { _showError('Reset token missing. Please restart the process.'); return false; }
     if (newPassword.isEmpty) { _showError('New password is required'); return false; }
-    if (newPassword.length < 8) { _showError('Password must be at least 8 characters'); return false; }
-    if (!newPassword.contains(RegExp(r'[A-Z]'))) { _showError('Password must contain at least one uppercase letter'); return false; }
-    if (!newPassword.contains(RegExp(r'[a-z]'))) { _showError('Password must contain at least one lowercase letter'); return false; }
-    if (!newPassword.contains(RegExp(r'[0-9]'))) { _showError('Password must contain at least one number'); return false; }
     if (confirmPassword.isEmpty) { _showError('Please confirm your password'); return false; }
     if (confirmPassword != newPassword) { _showError('Passwords do not match'); return false; }
     return true;

@@ -195,7 +195,7 @@ class _BagTypeCard extends StatelessWidget {
                     ),
                     child: Image.asset(
                       image,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   SizedBox(height: 16.h),

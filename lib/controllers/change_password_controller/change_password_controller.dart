@@ -69,22 +69,6 @@ class ChangePasswordController extends GetxController {
       _showError('New password is required');
       return false;
     }
-    if (newPassword.length < 8) {
-      _showError('New password must be at least 8 characters');
-      return false;
-    }
-    if (!newPassword.contains(RegExp(r'[A-Z]'))) {
-      _showError('New password must contain at least one uppercase letter');
-      return false;
-    }
-    if (!newPassword.contains(RegExp(r'[a-z]'))) {
-      _showError('New password must contain at least one lowercase letter');
-      return false;
-    }
-    if (!newPassword.contains(RegExp(r'[0-9]'))) {
-      _showError('New password must contain at least one number');
-      return false;
-    }
     if (newPassword == currentPassword) {
       _showError('New password must be different from current password');
       return false;
